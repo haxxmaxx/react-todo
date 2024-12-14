@@ -7,15 +7,16 @@ A simple fullstack todo app written in node and react
 The idea was to create something similar to the apple reminders app. I really like how user-friendly it is, especially three features:
 
 - checking and unchecking items is debounced, and once you are inactive, the items are deleted.
-  This checkbox and delete button are the same, but you can still "undo deleting" by unchecking an item.
-- There is no edit button, you simply press the text to start editing it. Once you are done, it is saved automatically. I tried to mimic the styling for this, making the inputs look like plain text, and not something you can edit. And once you blur the item or press enter, you call the backend.
+  This makes the checkbox and the delete button are the same, but you can still "undo deleting" by unchecking an item.
+- There is no edit button, you simply press the text to start editing it. Once you are done, it is saved automatically.The text doesn't look like an input element, creating a much cleaner look.
 - There is no empty add form. You simple press the below the existing items to start to type and create a new item.
 
 Since the last one kind of collided with the pagination, I decided to do the first two.
-I focused mostly focused on creating intuitive UI, well structure files, short function and easy-to-read code.
+I focused mostly on creating intuitive UI, well structure files, short functions and easy-to-read code.
 I wanted to do as few "resetting" actions as possible.
-For example when you add an item, check items or change the sorting, you should stay on the same view.
-The only time something changes is if filter and the page you were on doesn't exist anymore. Then you move to the last existing page.
+For example when you add an item, check items or change the sorting, you should stay on the same page.
+The only time the page changes is if filter and the page you were on doesn't exist anymore.
+Then you move to the last existing page.
 
 ## Architecture
 
@@ -41,8 +42,8 @@ The main advantage is that you can do any combination of filtering, sorting and 
 
 ## Tech choices
 
-In general I've done nothing unique here. I've tried to use as few packages as possible, that are very common.
-There are no major considerations with such a small app, other that don't make things overly complicated.
+In general I've done nothing unique here.
+I've tried to use as few packages as possible for it to be lightweight and picked very common ones for easy collaboration (if that would ever be needed).
 
 ### Vite
 
@@ -64,8 +65,8 @@ Again, simplest choice to do REST API calls.
 
 ## De-scoped/Ideas
 
-- Proper backend: I basically have no type safety or error handling. But I put almost all time demonstrating what I know about building a frontend
-- Dynamic UI: The UI is very static, especially in terms of height. I wanted to make sure there is no scroll and that stuff doesn't jump around.
+- **Proper backend:** I basically have no type safety or error handling. But I put almost all time demonstrating what I know about building a frontend
+- **Proper deploying:** The only way to run this currently is through two ports on localhost
+- **Dynamic UI:** The UI is very static, especially in terms of height. I wanted to make sure there is no scroll and that stuff doesn't jump around.
   So the list is set to a fixed height
-- Testing: There are a couple of tests and some comments outlining how I would test this. In general, I've broken out most of the business logic, so unit testing the functions would give a pretty high confidence.
-- Animation: I would really like to animate nicely when you add and remove items. This makes it easier to keep track of where things go
+- **Testing:** There are a couple of tests and some comments outlining how I would test this. In general, I've broken out most of the business logic, so unit testing the functions would give a pretty high confidence. -** Animation:** I would really like things animate nicely when you add and remove items. This makes it easier to keep track of where things go
