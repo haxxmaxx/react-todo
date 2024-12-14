@@ -17,7 +17,7 @@ const Pagination = ({ todoState, todoDispatch }: PaginationProps) => {
 
   return (
     <MuiPagination
-      count={todoState.pages}
+      count={todoState.pageCount}
       page={todoState.page}
       color="primary"
       onChange={handlePageChange}

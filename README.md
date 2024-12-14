@@ -45,6 +45,10 @@ The main advantage is that you can do any combination of filtering, sorting and 
 In general I've done nothing unique here.
 I've tried to use as few packages as possible for it to be lightweight and picked very common ones for easy collaboration (if that would ever be needed).
 
+### nmp
+
+I prefer pnpm, but npm is the default and no real benefit with something else on a small project like this.
+
 ### Vite
 
 Mostly chose this since you can setup a repo that has typescript and react installed, plus nice lint rules.

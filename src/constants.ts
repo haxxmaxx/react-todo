@@ -10,9 +10,9 @@ export const DEFAULT_STATE = {
   sortedTodos: [],
   visibleTodos: [],
   filteredTodos: [],
-  sorting: Sorting.AlphaDesc,
+  sorting: Sorting.CreatedAsc,
   filter: "",
-  pages: 1,
+  pageCount: 1,
   page: 1,
   checkedTodos: {},
 };

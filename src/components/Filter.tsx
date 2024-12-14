@@ -11,6 +11,7 @@ const Filter = ({ todoDispatch }: FilterProps) => {
 
   return (
     <TextField
+      className="filter"
       placeholder="Search..."
       type="search"
       variant="outlined"

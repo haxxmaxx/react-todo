@@ -8,6 +8,14 @@ export const sortTodos = (todos: Todo[], sort?: string) => {
       return todos.sort((a, b) => a.title.localeCompare(b.title));
     case Sorting.AlphaDesc:
       return todos.sort((a, b) => b.title.localeCompare(a.title));
+    case Sorting.CreatedAsc:
+      return todos.sort((a, b) =>
+        a.creationDate.toString().localeCompare(b.creationDate.toString())
+      ); // b.creationDate - a.creationDate);
+    case Sorting.CreatedDesc:
+      return todos.sort((a, b) =>
+        b.creationDate.toString().localeCompare(a.creationDate.toString())
+      );
     default:
       return todos;
   }
@@ -33,7 +41,8 @@ export const getTodosOnPage = (todos: Todo[], page: number) => {
 };
 
 // Todo: name
-export const getCappedPage = (pages: number, page: number) => Math.min(Math.max(1, page), pages);
+export const getCappedPage = (pageCount: number, page: number) =>
+  Math.min(Math.max(1, page), pageCount);
 
 // TODO: name
 export const getUpdatedTodoLists = (
@@ -44,11 +53,11 @@ export const getUpdatedTodoLists = (
 ) => {
   const sortedTodos = sortTodos(allTodos, sort);
   const filteredTodos = filterTodos(sortedTodos, filter);
-  const pages = getNumberOfPages(filteredTodos);
-  const page = getCappedPage(pages, oldPage);
+  const pageCount = getNumberOfPages(filteredTodos);
+  const page = getCappedPage(pageCount, oldPage);
   const visibleTodos = getTodosOnPage(filteredTodos, page);
 
-  return { sortedTodos, filteredTodos, visibleTodos, pages, page };
+  return { sortedTodos, filteredTodos, visibleTodos, pageCount, page };
 };
 
 export const updateCheckedTodos = (checkedTodos: CheckedTodos, id: string) => {

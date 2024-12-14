@@ -1,4 +1,4 @@
-import { Todo } from "./types";
+import { FormName, Todo } from "./types";
 
 export const generateId = (title: string) => {
   const kebabCaseTitle = title.replace(/\s+/g, "-").toLowerCase();
@@ -7,22 +7,38 @@ export const generateId = (title: string) => {
   return `${kebabCaseTitle}-${randomNumber}`;
 };
 
-export const createNewTodo = (formData: FormData) => {
-  const formProps: Record<string, string> = {};
+export const getFormProps = (formData: FormData) => {
+  const formProps: Record<FormName, string> = {
+    [FormName.Title]: "",
+    [FormName.Description]: "",
+    [FormName.Date]: "",
+  };
   for (const [label, value] of formData) {
-    formProps[label] = value as string;
+    formProps[label as FormName] = value as string;
   }
+
+  return formProps;
+};
+
+export const createNewTodo = (formData: FormData) => {
+  const formProps = getFormProps(formData);
 
   return {
     ...formProps,
     id: generateId(formProps.title),
-  } as Todo;
+    creationDate: new Date(),
+  };
 };
 
-export const hasTodoChanged = (oldTodo: Todo, newTodo: Todo) => {
+export const getUpdatedTodo = (formData: FormData, oldTodo: Todo) => ({
+  ...oldTodo,
+  ...getFormProps(formData),
+});
+
+export const hasTodoChanged = (oldTodo: Todo, updatedTodo: Todo) => {
   return (
-    newTodo.title !== oldTodo.title ||
-    newTodo.description !== oldTodo.description ||
-    newTodo.description !== oldTodo.description
+    updatedTodo.title !== oldTodo.title ||
+    updatedTodo.description !== oldTodo.description ||
+    updatedTodo.date !== oldTodo.date
   );
 };

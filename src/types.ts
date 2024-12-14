@@ -7,8 +7,17 @@ export enum TodoAction {
 }
 
 export enum Sorting {
-  AlphaAsc = "alphaAsc",
-  AlphaDesc = "alphaDesc",
+  AlphaAsc = "Alpha Ascending",
+  AlphaDesc = "Alpha Descending",
+  CreatedAsc = "Created Ascending",
+  CreatedDesc = "Created Descending",
+  // TODO: due date
+}
+
+export enum FormName {
+  Title = "title",
+  Description = "description",
+  Date = "date",
 }
 
 type SetTodosAction = {
@@ -46,6 +55,7 @@ export type Todo = {
   description?: string;
   date?: string;
   id: string;
+  creationDate: Date;
 };
 
 export type CheckedTodos = Record<string, boolean>;
@@ -59,5 +69,5 @@ export type TodoState = {
   filter: string;
   sorting: Sorting;
   page: number;
-  pages: number;
+  pageCount: number;
 };

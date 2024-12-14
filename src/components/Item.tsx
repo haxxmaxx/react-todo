@@ -1,22 +1,20 @@
-import { Checkbox, TextField } from "@mui/material";
-import { Todo, TodoAction, TodoDispatch } from "../types";
+import { Checkbox, Divider } from "@mui/material";
+import { FormName, Todo, TodoAction, TodoDispatch } from "../types";
 import { memo, useState } from "react";
-import { hasTodoChanged } from "../utils";
+import ItemInput from "./ItemInput";
 
 type TodoEntryProps = {
   todo: Todo;
   todoDispatch: TodoDispatch;
-  updateTodo: (formData: Todo) => void;
+  updateTodo: (formData: FormData, oldTodo: Todo) => void;
 };
 
 const Item = (props: TodoEntryProps) => {
   const { todo, todoDispatch, updateTodo } = props;
   const [isChecked, setIsChecked] = useState(false);
-  const [title, setTitle] = useState(todo.title);
-  const [description, setDescription] = useState(todo.description);
-  const [date, setDate] = useState(todo.date);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const id = `entry-${todo.id}`;
+  const id = `item-${todo.id}`;
 
   const handleCheck = () => {
     setIsChecked(!isChecked);
@@ -26,17 +24,15 @@ const Item = (props: TodoEntryProps) => {
     });
   };
 
-  const handleSubmit = () => {
-    const newTodo = { title, description, date, id: todo.id };
-
-    if (hasTodoChanged(todo, newTodo)) {
-      updateTodo(newTodo);
-    }
+  const handleSubmit = (target: HTMLFormElement) => {
+    const formData = new FormData(target);
+    updateTodo(formData, todo);
   };
 
   const handleKeyUp = (evt: React.KeyboardEvent<HTMLFormElement>) => {
     if (evt.key === "Enter") {
-      handleSubmit();
+      handleSubmit(evt.currentTarget);
+      evt.currentTarget.blur();
     }
   };
 
@@ -45,27 +41,46 @@ const Item = (props: TodoEntryProps) => {
     const formElement = evt.target.closest(`#${id}`);
 
     if (entryIsBlurred && formElement) {
-      handleSubmit();
+      handleSubmit(formElement as HTMLFormElement);
+      setIsFocused(false);
     }
   };
 
-  const handleTitleChange = (evt: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(evt.target.value);
-
-  const handleDescriptionChange = (evt: React.ChangeEvent<HTMLInputElement>) =>
-    setDescription(evt.target.value);
-
-  const handleDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => setDate(evt.target.value);
+  const updateFocus = () => setIsFocused(true);
 
   return (
-    <div className="todo-entry" id={id}>
-      <Checkbox checked={isChecked} onChange={handleCheck} />
-      <form onBlur={handleBlur} onKeyUp={handleKeyUp}>
-        <TextField size="small" value={title} onChange={handleTitleChange} />
-        <TextField size="small" value={description} onChange={handleDescriptionChange} />
-        <TextField size="small" value={date} onChange={handleDateChange} />
-      </form>
-    </div>
+    <li className="flex-column">
+      <div className="flex">
+        <Checkbox className="checkbox" checked={isChecked} onChange={handleCheck} />
+        <form
+          className="flex-column"
+          onBlur={handleBlur}
+          onKeyUp={handleKeyUp}
+          onFocus={updateFocus}
+          id={id}
+        >
+          <ItemInput
+            name={FormName.Title}
+            value={todo.title}
+            isFocused={isFocused}
+            isChecked={isChecked}
+          />
+          <ItemInput
+            name={FormName.Description}
+            value={todo.description}
+            isFocused={isFocused}
+            isChecked={isChecked}
+          />
+          <ItemInput
+            name={FormName.Date}
+            value={todo.date}
+            isFocused={isFocused}
+            isChecked={isChecked}
+          />
+        </form>
+      </div>
+      <Divider variant="middle" />
+    </li>
   );
 };
 

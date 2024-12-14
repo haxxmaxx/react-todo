@@ -16,8 +16,10 @@ function App() {
   return (
     <>
       <Add addTodo={addTodo} />
-      <Filter todoDispatch={todoDispatch} />
-      <Sort todoState={todoState} todoDispatch={todoDispatch} />
+      <div className="top-controls">
+        <Filter todoDispatch={todoDispatch} />
+        <Sort todoState={todoState} todoDispatch={todoDispatch} />
+      </div>
       <List
         visibleTodos={todoState.visibleTodos}
         todoDispatch={todoDispatch}

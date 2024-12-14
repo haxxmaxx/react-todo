@@ -1,6 +1,6 @@
 import { Todo, TodoDispatch, TodoState } from "../types";
 import axios from "axios";
-import { createNewTodo } from "../utils";
+import { createNewTodo, getUpdatedTodo, hasTodoChanged } from "../utils";
 import { useCallback, useEffect, useRef } from "react";
 import { getTodos, patchTodos, postTodo, putTodo } from "./crud-utils";
 import { BASE_URL, DEBOUNCE_TIME } from "../constants";
@@ -28,17 +28,22 @@ const useTodoHandler = (todoState: TodoState, todoDispatch: TodoDispatch) => {
     getTodos(todoDispatch);
   }, [todoDispatch]);
 
-  // Since the items hava updateTodo as a prop, I choose to memoize it.
+  // Since the items have an updateTodo as a prop, I choose to memoize it.
   // That enables the Items to be memoized and only re-render when the todo prop changes
   const updateTodo = useCallback(
-    async (updatedTodo: Todo) => {
+    async (formData: FormData, oldTodo: Todo) => {
+      const updatedTodo = getUpdatedTodo(formData, oldTodo.id);
+      if (!hasTodoChanged(oldTodo, updatedTodo)) {
+        return;
+      }
+
       await putTodo(updatedTodo);
       await getTodos(todoDispatch);
     },
     [todoDispatch]
   );
 
-  // This one a memoized for consistency, it is not really a performance gain
+  // This one is memoized for consistency, it is not really a performance gain
   const addTodo = useCallback(
     async (formData: FormData) => {
       const newTodo = createNewTodo(formData);

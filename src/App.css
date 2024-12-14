@@ -5,6 +5,58 @@
   text-align: center;
 }
 
-.todo-entry {
+.flex {
   display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-form {
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: column;
+}
+
+.add-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+  width: 480px;
+}
+
+.add-date-and-submit {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.top-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.filter {
+  flex-grow: 1;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-input {
+  padding: 0;
+}
+
+.list {
+  padding: 0;
+}
+
+.checkbox {
+  padding: 4px !important;
+  height: 32px;
 }

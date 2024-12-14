@@ -4,7 +4,7 @@ import { Todo, TodoDispatch } from "../types";
 type ListProps = {
   visibleTodos: Todo[];
   todoDispatch: TodoDispatch;
-  updateTodo: (updatedTodo: Todo) => Promise<void>;
+  updateTodo: (formData: FormData, oldTodo: Todo) => Promise<void>;
 };
 
 const List = ({ visibleTodos, todoDispatch, updateTodo }: ListProps) => {
@@ -13,7 +13,7 @@ const List = ({ visibleTodos, todoDispatch, updateTodo }: ListProps) => {
   }
 
   return (
-    <ul>
+    <ul className="flex-column list">
       {visibleTodos.map((todo) => (
         <Item key={todo.id} todo={todo} todoDispatch={todoDispatch} updateTodo={updateTodo} />
       ))}
