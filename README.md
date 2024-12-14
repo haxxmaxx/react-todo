@@ -4,10 +4,68 @@ A simple fullstack todo app written in node and react
 
 ## Overview and design
 
+The idea was to create something similar to the apple reminders app. I really like how user-friendly it is, especially three features:
+
+- checking and unchecking items is debounced, and once you are inactive, the items are deleted.
+  This checkbox and delete button are the same, but you can still "undo deleting" by unchecking an item.
+- There is no edit button, you simply press the text to start editing it. Once you are done, it is saved automatically. I tried to mimic the styling for this, making the inputs look like plain text, and not something you can edit. And once you blur the item or press enter, you call the backend.
+- There is no empty add form. You simple press the below the existing items to start to type and create a new item.
+
+Since the last one kind of collided with the pagination, I decided to do the first two.
+I focused mostly focused on creating intuitive UI, well structure files, short function and easy-to-read code.
+I wanted to do as few "resetting" actions as possible.
+For example when you add an item, check items or change the sorting, you should stay on the same view.
+The only time something changes is if filter and the page you were on doesn't exist anymore. Then you move to the last existing page.
+
 ## Architecture
+
+### backend
+
+The backend is a very simple REST API. It is only called when adding, removing or editing items (sorting, pagination and filtering is done in the frontend).
+Therefor I set up, GET, POST, PUT and PATCH endpoints.
+I don't have a DELETE, since you delete by calling PATCH and thus can delete multiple items at once.
+Every time the "database" is changed, I do a GET request to make sure I am up to date with the backend.
+
+### frontend
+
+On the frontend, I tried to have a single source of truth. I choose to have a react reducer that keeps track of all the todos.
+There are multiple lists of todos:
+
+- `SortedTodos`: One with all the sorted items
+- `FilteredTodos`: One with sorted and filtered items
+- `VisibleTodos`: One with sorted and filtered items, visible on the page.
+
+This means you have to calculate all three when sorting and filtering, but they should be fast if there is no change
+(the sorting is quick when changing the filter, and vise versa).
+The main advantage is that you can do any combination of filtering, sorting and pagination without resetting anything else.
 
 ## Tech choices
 
-## De-scoped
+In general I've done nothing unique here. I've tried to use as few packages as possible, that are very common.
+There are no major considerations with such a small app, other that don't make things overly complicated.
 
-## Next steps and future ideas
+### Vite
+
+Mostly chose this since you can setup a repo that has typescript and react installed, plus nice lint rules.
+Also really fast (not that it is needed on such a small project like this)
+
+### Mui
+
+It is a library that I am familiar with that I knew had a pagination component, so it was the natural choice.
+It also comes with a nice default styling and has a debouncer util
+
+### express
+
+Simple and widespread package to write a rest API. That together with the crud package was all I needed to run a server locally.
+
+### axios
+
+Again, simplest choice to do REST API calls.
+
+## De-scoped/Ideas
+
+- Proper backend: I basically have no type safety or error handling. But I put almost all time demonstrating what I know about building a frontend
+- Dynamic UI: The UI is very static, especially in terms of height. I wanted to make sure there is no scroll and that stuff doesn't jump around.
+  So the list is set to a fixed height
+- Testing: There are a couple of tests and some comments outlining how I would test this. In general, I've broken out most of the business logic, so unit testing the functions would give a pretty high confidence.
+- Animation: I would really like to animate nicely when you add and remove items. This makes it easier to keep track of where things go
