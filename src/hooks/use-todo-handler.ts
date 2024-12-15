@@ -29,7 +29,7 @@ const useTodoHandler = (todoState: TodoState, todoDispatch: TodoDispatch) => {
     getTodos(todoDispatch);
   }, [todoDispatch]);
 
-  // Since the items have an updateTodo as a prop, I choose to memoize it.
+  // Since the items has updateTodo as a prop, I choose to memoize it.
   // That enables the Items to be memoized and only re-render when the todo prop changes
   const updateTodo = useCallback(
     async (formData: FormData, oldTodo: Todo) => {

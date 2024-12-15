@@ -11,19 +11,10 @@ export const getTodos = (todoDispatch: TodoDispatch) =>
     .catch((error) => console.error(error));
 
 export const postTodo = (todo: Todo) =>
-  axios
-    .post("/todos", todo)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+  axios.post("/todos", todo).catch((error) => console.log(error));
 
 export const putTodo = (todo: Todo) =>
-  axios
-    .put(`/todos/${todo.id}`, todo)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+  axios.put(`/todos/${todo.id}`, todo).catch((error) => console.log(error));
 
 export const patchTodos = (checkedTodos: CheckedTodos) =>
-  axios
-    .patch("/todos", checkedTodos)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+  axios.patch("/todos", checkedTodos).catch((error) => console.log(error));

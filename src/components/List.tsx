@@ -17,6 +17,7 @@ const List = ({ visibleTodos, todoDispatch, updateTodo }: ListProps) => {
     <ul className="flex-column list">
       {visibleTodos.map((todo, todoIdx) => {
         const showDivider = todoIdx !== 9 && todoIdx !== visibleTodos.length - 1;
+
         return (
           <Item
             key={todo.id}
