@@ -82,8 +82,8 @@ It also comes with a nice default styling and has a debouncer util
 
 ### CSS
 
-I've decided to not use any of the fancy ways of styling that mui has.
-I've simply created some classes to compliment then build in styling in Mui.
+I've decided to not use any of the fancy ways of styling that mui has, and just use css classes instead
+I don't like having inline css like `style` or `sx`. and styled components only make sense if you reuse them (plus a lot of boilerplate)
 
 ### express
 
@@ -97,8 +97,9 @@ Again, simplest choice to do REST API calls.
 
 - **Proper backend:** I basically have no type safety or error handling. But I guess that wasn't the main focus of the assignment
 - **Proper deploying:** The only way to run this currently is through two ports on localhost
-- **Dynamic UI:** The UI is very static, especially in terms of height. I wanted to make sure there is no scroll and that stuff doesn't jump around.
+- **Dynamic UI:** In terms of height, the UI is static. I wanted to make sure there is no scroll so that stuff doesn't jump around.
   So the list is set to a fixed height
-- **Testing:** I was planning to add unit tests for some files but didn't have time. Since almost all the buissness logic is broken out so testing that would get great coverage.
-  In adding, I would add some basic React Testing Library tests. I could elaborate on this if necesarry.
+- **Testing:** I was planning to add unit tests for some files but didn't have time.
+  Since almost all the buissness logic is broken out, unit testing those files would result in pretty good great coverage.
+  In addition, I would add some basic React Testing Library tests. I could elaborate on this if necesarry.
 - **Animation:** I would really like things animate nicely when you add and remove items. This makes it easier to keep track of where things go
