@@ -11,7 +11,8 @@ export enum Sorting {
   AlphaDesc = "Alpha Descending",
   CreatedAsc = "Created Ascending",
   CreatedDesc = "Created Descending",
-  // TODO: due date
+  DueAsc = "Due Date Ascending",
+  DueDesc = "Due Date Descending",
 }
 
 export enum FormName {
@@ -52,10 +53,10 @@ export type TodoDispatch = React.Dispatch<TodoActionType>;
 
 export type Todo = {
   title: string;
-  description?: string;
-  date?: string;
+  description: string;
+  date: string;
   id: string;
-  creationDate: Date;
+  creationDate: string;
 };
 
 export type CheckedTodos = Record<string, boolean>;

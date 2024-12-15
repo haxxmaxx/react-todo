@@ -7,12 +7,11 @@ type TodoEntryProps = {
   todo: Todo;
   todoDispatch: TodoDispatch;
   updateTodo: (formData: FormData, oldTodo: Todo) => void;
+  showDivider: boolean;
 };
 
-const Item = (props: TodoEntryProps) => {
-  const { todo, todoDispatch, updateTodo } = props;
+const Item = ({ todo, todoDispatch, updateTodo, showDivider }: TodoEntryProps) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
 
   const id = `item-${todo.id}`;
 
@@ -42,44 +41,25 @@ const Item = (props: TodoEntryProps) => {
 
     if (entryIsBlurred && formElement) {
       handleSubmit(formElement as HTMLFormElement);
-      setIsFocused(false);
     }
   };
-
-  const updateFocus = () => setIsFocused(true);
 
   return (
     <li className="flex-column">
       <div className="flex">
         <Checkbox className="checkbox" checked={isChecked} onChange={handleCheck} />
-        <form
-          className="flex-column"
-          onBlur={handleBlur}
-          onKeyUp={handleKeyUp}
-          onFocus={updateFocus}
-          id={id}
-        >
-          <ItemInput
-            name={FormName.Title}
-            value={todo.title}
-            isFocused={isFocused}
-            isChecked={isChecked}
-          />
+        <form className="flex-column item-form" onBlur={handleBlur} onKeyUp={handleKeyUp} id={id}>
+          <ItemInput name={FormName.Title} value={todo.title} isChecked={isChecked} />
           <ItemInput
             name={FormName.Description}
             value={todo.description}
-            isFocused={isFocused}
             isChecked={isChecked}
+            isDetail
           />
-          <ItemInput
-            name={FormName.Date}
-            value={todo.date}
-            isFocused={isFocused}
-            isChecked={isChecked}
-          />
+          <ItemInput name={FormName.Date} value={todo.date} isChecked={isChecked} isDetail />
+          {showDivider && <Divider className="item-divider" />}
         </form>
       </div>
-      <Divider variant="middle" />
     </li>
   );
 };

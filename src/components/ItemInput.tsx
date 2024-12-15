@@ -3,19 +3,17 @@ import { FormName } from "../types";
 
 type ItemInputProps = {
   name: FormName;
-  value?: string;
-  isFocused: boolean;
+  value: string;
   isChecked: boolean;
+  isDetail?: boolean;
 };
 
-const ItemInput = ({ name, value, isFocused, isChecked }: ItemInputProps) => {
-  if (!isFocused && !value) {
-    return null;
-  }
+const ItemInput = ({ name, value, isChecked, isDetail }: ItemInputProps) => {
+  const classes = `item-input ${isDetail ? "detail" : ""}`;
 
   return (
     <Input
-      className="item-input"
+      className={classes}
       size="small"
       disableUnderline
       name={name}

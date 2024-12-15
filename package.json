@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "api": "node ./api/main.js",
+    "api:pre-populate": "node ./api/main.js --pre-populate",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

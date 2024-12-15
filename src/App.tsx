@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Add addTodo={addTodo} />
-      <div className="top-controls">
+      <div className="flex top-controls">
         <Filter todoDispatch={todoDispatch} />
         <Sort todoState={todoState} todoDispatch={todoDispatch} />
       </div>

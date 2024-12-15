@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 480px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -14,28 +14,27 @@
   flex-direction: column;
 }
 
-.add-form {
-  display: flex;
-  margin-bottom: 16px;
-  flex-direction: column;
+.center {
+  align-items: center;
+  justify-content: center;
 }
 
-.add-inputs {
-  display: flex;
-  flex-direction: column;
+.add-form {
+  margin-bottom: 16px;
+}
+
+.add-title-and-description {
   gap: 8px;
   margin-bottom: 8px;
-  width: 480px;
+  width: 100%;
 }
 
 .add-date-and-submit {
-  display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
 }
 
 .top-controls {
-  display: flex;
   gap: 8px;
 }
 
@@ -43,20 +42,35 @@
   flex-grow: 1;
 }
 
-.item {
-  display: flex;
-  flex-direction: column;
+.item-input .MuiInput-input {
+  padding: 0;
+  text-overflow: ellipsis;
 }
 
-.item-input {
-  padding: 0;
+.item-input.detail .MuiInput-input {
+  font-size: 12px;
 }
 
 .list {
   padding: 0;
+  margin-top: 8px;
+  height: 527px; /* This is hardcoded to make sure the pagination stays in place */
 }
 
 .checkbox {
   padding: 4px !important;
   height: 32px;
+}
+
+.item-form {
+  padding-top: 4px;
+  width: 100%;
+}
+
+.item-divider {
+  padding-top: 4px;
+}
+
+.no-todos {
+  padding: 32px;
 }

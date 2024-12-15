@@ -10,27 +10,24 @@ const Add = ({ addTodo }: AddProps) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     addTodo(formData);
+    evt.target.reset();
   };
 
   return (
-    <form className="add-form" onSubmit={handleSubmit}>
-      <div className="add-inputs">
-        <TextField
-          className=".add-text-input"
-          size="small"
-          name={FormName.Title}
-          placeholder="Todo..."
-        />
-        <TextField
-          className=".add-text-input"
-          size="small"
-          name={FormName.Description}
-          placeholder="Description..."
-        />
+    <form className="flex-column add-form" onSubmit={handleSubmit}>
+      <div className="flex-column add-title-and-description">
+        <TextField size="small" name={FormName.Title} placeholder="Todo..." />
+        <TextField size="small" name={FormName.Description} placeholder="Description..." />
       </div>
-      <div className="add-date-and-submit">
-        <TextField size="small" name={FormName.Date} placeholder="date..." />
-        <Button className="add-submit" type="submit" size="small">
+      <div className="flex add-date-and-submit">
+        <TextField size="small" name={FormName.Date} placeholder="date... (YY-MM-DD)" />
+        <Button
+          className="add-submit"
+          variant="contained"
+          disableElevation
+          type="submit"
+          size="small"
+        >
           Add
         </Button>
       </div>

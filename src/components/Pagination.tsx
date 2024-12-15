@@ -16,12 +16,14 @@ const Pagination = ({ todoState, todoDispatch }: PaginationProps) => {
   }
 
   return (
-    <MuiPagination
-      count={todoState.pageCount}
-      page={todoState.page}
-      color="primary"
-      onChange={handlePageChange}
-    />
+    <div className="flex center">
+      <MuiPagination
+        count={todoState.pageCount}
+        page={todoState.page}
+        color="primary"
+        onChange={handlePageChange}
+      />
+    </div>
   );
 };
 export default Pagination;

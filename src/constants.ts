@@ -1,6 +1,6 @@
 import { Sorting } from "./types";
 
-export const TODOS_PER_PAGE = 10;
+export const TODOS_PER_PAGE = 8;
 
 export const ENTRIES = 20;
 

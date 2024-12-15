@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import Item from "./Item";
 import { Todo, TodoDispatch } from "../types";
 
@@ -9,14 +10,23 @@ type ListProps = {
 
 const List = ({ visibleTodos, todoDispatch, updateTodo }: ListProps) => {
   if (!visibleTodos.length) {
-    return <p>No todos found</p>;
+    return <Typography className="no-todos">Nothing left to do, go have a 🍺!</Typography>;
   }
 
   return (
     <ul className="flex-column list">
-      {visibleTodos.map((todo) => (
-        <Item key={todo.id} todo={todo} todoDispatch={todoDispatch} updateTodo={updateTodo} />
-      ))}
+      {visibleTodos.map((todo, todoIdx) => {
+        const showDivider = todoIdx !== 9 && todoIdx !== visibleTodos.length - 1;
+        return (
+          <Item
+            key={todo.id}
+            todo={todo}
+            todoDispatch={todoDispatch}
+            updateTodo={updateTodo}
+            showDivider={showDivider}
+          />
+        );
+      })}
     </ul>
   );
 };

@@ -9,13 +9,13 @@ export const sortTodos = (todos: Todo[], sort?: string) => {
     case Sorting.AlphaDesc:
       return todos.sort((a, b) => b.title.localeCompare(a.title));
     case Sorting.CreatedAsc:
-      return todos.sort((a, b) =>
-        a.creationDate.toString().localeCompare(b.creationDate.toString())
-      ); // b.creationDate - a.creationDate);
+      return todos.sort((a, b) => a.creationDate.localeCompare(b.creationDate));
     case Sorting.CreatedDesc:
-      return todos.sort((a, b) =>
-        b.creationDate.toString().localeCompare(a.creationDate.toString())
-      );
+      return todos.sort((a, b) => b.creationDate.localeCompare(a.creationDate));
+    case Sorting.DueAsc:
+      return todos.sort((a, b) => a.date.localeCompare(b.date));
+    case Sorting.DueDesc:
+      return todos.sort((a, b) => b.date.localeCompare(a.date));
     default:
       return todos;
   }

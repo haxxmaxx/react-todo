@@ -22,11 +22,12 @@ export const getFormProps = (formData: FormData) => {
 
 export const createNewTodo = (formData: FormData) => {
   const formProps = getFormProps(formData);
+  const dateNow = new Date();
 
   return {
     ...formProps,
     id: generateId(formProps.title),
-    creationDate: new Date(),
+    creationDate: dateNow.toISOString(),
   };
 };
 
