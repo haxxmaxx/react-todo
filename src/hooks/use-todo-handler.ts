@@ -24,6 +24,7 @@ const useTodoHandler = (todoState: TodoState, todoDispatch: TodoDispatch) => {
     }
   }, [todoState.checkedTodos]);
 
+  // intitial fetch
   useEffect(() => {
     getTodos(todoDispatch);
   }, [todoDispatch]);
