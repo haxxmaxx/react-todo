@@ -31,7 +31,6 @@ app.post("/todos", (req, res) => {
 
 app.put("/todos/:id", (req, res) => {
   const todoId = req.body.id;
-  console.log({ state, todoId });
   state[todoId] = req.body;
   res.send("null");
   res.status(200).end();
